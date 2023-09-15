@@ -1,8 +1,8 @@
 class FrontierCli < Formula
     desc "Description of mytool"
     homepage "https://example.com/mytool"
-    url "file:///Users/franciswilliams/Documents/Projects/frontier-cli/dist-0.0.1.tar.gz"
-    sha256 "db7992145e673666f3f7362e2bb583e6ca1f63165c02391a719eaef92e28ef1c"
+    url "https://eupraxia-labs-downloads.s3.amazonaws.com/frontier-cli-v0.0.11.tar.gz"
+    sha256 "0553f2fecee2931e743582a86ba97c6f0ec4bde05c9d0d065978d2a660bdda12"
   
     def install
         # Determine the user's architecture and OS
