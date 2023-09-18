@@ -1,8 +1,8 @@
 class FrontierCli < Formula
-    desc "Description of mytool"
-    homepage "https://example.com/mytool"
-    url "https://eupraxia-labs-downloads.s3.amazonaws.com/frontier-cli-v0.0.11.tar.gz"
-    sha256 "0553f2fecee2931e743582a86ba97c6f0ec4bde05c9d0d065978d2a660bdda12"
+    desc "Frontier CLI is the command line interface for interacting with your Frontier Managed Clusters"
+    homepage "https://www.eupraxialabs.com/xtreme-products/#federal-frontier"
+    url "https://eupraxia-labs-downloads.s3.amazonaws.com/frontier-cli-v0.1.4.tar.gz"
+    sha256 "e63240af5683879c5482ab61e49ee1268ecb8f3078f7ae30fce78027998b6810"
   
     def install
         # Determine the user's architecture and OS
@@ -10,7 +10,7 @@ class FrontierCli < Formula
         os = OS.kernel_name
 
         folder = "frontier-cli"
-        filename = "frontier-cli"
+        filename = "frontier"
 
         case os
         when "Linux"
@@ -34,7 +34,9 @@ class FrontierCli < Formula
     end
   
     test do
-      # TODO: Add tests
-    end
+        # # Test the command
+        # assert_predicate bin/"frontier", :exist?
+        # assert_predicate shell_output("#{bin}/frontier"), :empty?
+      end
 end
   
