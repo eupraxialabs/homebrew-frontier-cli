@@ -23,7 +23,7 @@ class FrontierCli < Formula
 
         case arch
         when :x86_64
-            folder += "_amd64"
+            folder += "_amd64_v1"
         when :arm64 
             folder += "_arm64"
         else
