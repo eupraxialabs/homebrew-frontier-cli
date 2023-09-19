@@ -2,9 +2,9 @@
 
 ## How do I install these formulae?
 
-`brew install eupraxialabs/frontier-cli/<formula>`
+`brew install eupraxialabs/frontier-cli/frontier-cli`
 
-Or `brew tap eupraxialabs/frontier-cli` and then `brew install <formula>`.
+Or `brew tap eupraxialabs/frontier-cli` and then `brew install frontier-cli`.
 
 ## Documentation
 
