@@ -1,8 +1,8 @@
 class FrontierCli < Formula
     desc "Frontier CLI is the command line interface for interacting with your Frontier Managed Clusters"
     homepage "https://www.eupraxialabs.com/xtreme-products/#federal-frontier"
-    url "https://eupraxia-labs-downloads.s3.amazonaws.com/frontier-cli-v0.1.4.tar.gz"
-    sha256 "e63240af5683879c5482ab61e49ee1268ecb8f3078f7ae30fce78027998b6810"
+    url "https://eupraxia-labs-downloads.s3.amazonaws.com/frontier-cli-v0.1.5.tar.gz"
+    sha256 "0eb4ff5095fc0730dc6cf8622e003dc9d8b2b1c3baf7af649dd3e81cefa9bead"
   
     def install
         # Determine the user's architecture and OS
