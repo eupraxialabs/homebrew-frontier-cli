@@ -1,42 +1,34 @@
 class FrontierCli < Formula
-    desc "Frontier CLI is the command line interface for interacting with your Frontier Managed Clusters"
-    homepage "https://www.eupraxialabs.com/xtreme-products/#federal-frontier"
-    url "https://eupraxia-labs-downloads.s3.amazonaws.com/frontier-cli-v0.1.5.tar.gz"
-    sha256 "0eb4ff5095fc0730dc6cf8622e003dc9d8b2b1c3baf7af649dd3e81cefa9bead"
-  
-    def install
-        # Determine the user's architecture and OS
-        arch = Hardware::CPU.arch
-        os = OS.kernel_name
+  desc "CLI for the Federal Frontier Platform — cluster management, AI assistant, infrastructure ops"
+  homepage "https://readthedocs.eupraxia.io/docs/frontier-cli/overview/"
+  version "5.8.0"
+  license "Proprietary"
 
-        folder = "frontier-cli"
-        filename = "frontier"
+  deprecate! date: "2026-10-31", because: "is replaced by eupraxialabs/frontier/frontier", replacement_formula: "eupraxialabs/frontier/frontier"
 
-        case os
-        when "Linux"
-            folder += "_linux"
-        when "Darwin"
-            folder += "_darwin"
-        else 
-            print "Unsupported Operating System: #{os}"
-        end
+  # Set HOMEBREW_FRONTIER_CLI_TOKEN to a read_package_registry deploy token (ask platform team).
+  @@base = "https://gitlab.com/api/v4/projects/41561861/packages/generic/frontier-cli/v#{version}"
 
-        case arch
-        when :x86_64
-            folder += "_amd64_v1"
-        when :arm64 
-            folder += "_arm64"
-        else
-            print "Unsupported Architecture: #{arch}"
-        end
-        
-        bin.install "#{folder}/#{filename}"
-    end
-  
-    test do
-        # # Test the command
-        # assert_predicate bin/"frontier", :exist?
-        # assert_predicate shell_output("#{bin}/frontier"), :empty?
-      end
+  if OS.mac? && Hardware::CPU.arm?
+    url "#{@@base}/frontier-darwin-arm64", headers: ["Deploy-Token: #{ENV.fetch("HOMEBREW_FRONTIER_CLI_TOKEN", "")}"]
+    sha256 "7c8e359b7c2ec4d6f4625462533324b38458f178151e599b78bcb818708ed3bb"
+  elsif OS.mac? && Hardware::CPU.intel?
+    url "#{@@base}/frontier-darwin-amd64", headers: ["Deploy-Token: #{ENV.fetch("HOMEBREW_FRONTIER_CLI_TOKEN", "")}"]
+    sha256 "beb5de1f337e981cffed3a1a8cae0f99f81f4229d9fde1399314c49343527f1d"
+  elsif OS.linux? && Hardware::CPU.arm?
+    url "#{@@base}/frontier-linux-arm64", headers: ["Deploy-Token: #{ENV.fetch("HOMEBREW_FRONTIER_CLI_TOKEN", "")}"]
+    sha256 "e2e7c7adcdcc226de9585368ba0fa260afea7adc94c5990f2ee28e87db338010"
+  elsif OS.linux? && Hardware::CPU.intel?
+    url "#{@@base}/frontier-linux-amd64", headers: ["Deploy-Token: #{ENV.fetch("HOMEBREW_FRONTIER_CLI_TOKEN", "")}"]
+    sha256 "fcb3ceac0b7b05fd6f2a96153dd413854b83d8a860d4c5ccedd994c1fcca5f7c"
+  end
+
+  def install
+    downloaded = Dir.glob("frontier-*").first || Dir.glob("*").reject { |f| f == "." }.first
+    bin.install downloaded => "frontier"
+  end
+
+  test do
+    assert_match "frontier-cli", shell_output("#{bin}/frontier version 2>&1")
+  end
 end
-  
